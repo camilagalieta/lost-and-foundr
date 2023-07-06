@@ -1,51 +1,47 @@
 .new-item {
-    /* max-width: 400px; */
-    margin: 0 auto;
-    padding: 50px;
-    background-color: #ADD8E6;
-  }
-  
-  label {
-    font-weight: bold;
-    font-size: 30px;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 50px;
+  background-color: #ADD8E6;
+}
+
+label {
+  font-weight: bold;
+  font-size: 40px;
+  display: block;
+  margin-bottom: 10px;
+  align-items: center;
+  text-align: justify;
+}
+
+  input {
+  width: 97%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  text-align: center;
+  align-items: center;
+  margin-left: 5px;
 
 }
-  
-  .input {
-    width: 200%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    /* display: flex; */
-    /* justify-content: center; */
-    /* align-items: center; */
-  }
-  
+
   .submit-btn {
-    background-color: #4caf50;
-    color: #fff;
-    padding: 20px 30px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    /* display: flex; */
-    /* justify-content: center; */
-    /* align-items: center; */
-  }
-  
-  .submit-btn:hover {
-    background-color: #45a049;
-    font-size: 50px;
-    display: flex;
-  }
+  background-color:rgb(51, 185, 141);
+  color:aliceblue;
+  font-size: 40px;
+  font-style: bold;
+  padding: 20px 30px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+
+}
 
 h2 {
-    font-size: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  font-size: 50px;
+  text-align: center;
+  margin-bottom: 20px;
 }

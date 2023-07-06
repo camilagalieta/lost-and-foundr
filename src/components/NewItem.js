@@ -25,10 +25,10 @@ function NewItem() {
       e.preventDefault();
 
     const newItem = {
-      itemPerdido: formulario.itemPerdido, 
-      descricao: formulario.descricao, 
-      local: formulario.local, 
-      dataRegistro: formulario.dataRegistro
+      item_name: formulario.itemPerdido, 
+      item_description: formulario.descricao, 
+      location_found: formulario.local, 
+      registration_date: formulario.dataRegistro
     };
 
     axios.post('http://localhost:3001/items/new', newItem)
@@ -68,7 +68,7 @@ function NewItem() {
               <label htmlFor="dataRegistro">Data de Registro:</label>
               <input type="text" id="dataRegistro" name="dataRegistro" value={dataRegistro} onChange={handleChange} />
             </div>
-            <button type="submit">Salvar</button>
+            <button className="submit-btn" type="submit">Salvar</button>
           </form>
         </div>
       );

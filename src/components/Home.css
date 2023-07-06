@@ -1,17 +1,23 @@
-h1 {
+.home {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 200px;
+    background-color:cornflowerblue;
+}
+
+.home h1 {
     font-size: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
+    color:aliceblue;
 }
 
-p {
+.home p {
     font-size: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
+    color:aliceblue;
 }
 
-header {
-    font-size: 20px;
-}
