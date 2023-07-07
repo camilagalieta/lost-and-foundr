@@ -6,6 +6,7 @@ import NewItem from './components/NewItem';
 import LostItems from './components/LostItems';
 import RecoveredItems from './components/RecoveredItems';
 import Menu from './components/Menu'
+import ItemCheckout from './components/ItemCheckout';
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
         <Route path = '/new-item' element = {<NewItem />} />
         <Route path = '/lost-items' element = {<LostItems />} />
         <Route path = '/recovered-items' element = {<RecoveredItems />} />
+        <Route path = '/item-checkout' element = {<ItemCheckout />} />
+      
       </Routes>
     </Router>
   );
