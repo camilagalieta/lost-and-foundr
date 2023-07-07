@@ -1,0 +1,7 @@
+/items
+/items/:id
+/items/new
+/items/update/:id
+/items/delete/:id
+/items/report/local
+/items/recovered/report

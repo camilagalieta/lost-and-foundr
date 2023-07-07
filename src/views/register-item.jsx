@@ -1,6 +1,7 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { NavbarWidget } from "../widgets/navbar";
 import { useState } from "react";
+import axios from "axios";
 
 export function RegisterItemView() {
   const [name, setName] = useState("");
@@ -8,10 +9,33 @@ export function RegisterItemView() {
   const [place, setPlace] = useState("");
   const [foundAt, setFoundAt] = useState("");
 
+  async function post() {
+    const body = {
+      item_name: name,
+      item_description: description,
+      location_found: place,
+      registration_date: foundAt,
+    };
+
+    await axios
+      .post("http://localhost:3001/items/new", body)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {});
+  }
+
   return (
     <Container className="items-section">
       <h2>Registrar item</h2>
-      <Form onSubmit={() => {}}>
+      <Form
+        onSubmit={() => {
+          post();
+        }}
+      >
         <Row>
           <Col>
             <Form.Group className="mb-3" controlId="formBasicEmail">
