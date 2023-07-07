@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import './RecoveredItems.css';
+
 
 function RecoveredItems() {
     const [items, setItems] = useState([]);

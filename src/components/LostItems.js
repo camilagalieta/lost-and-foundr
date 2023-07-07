@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import './LostItems.css'
+
 
 function LostItems() {
     const [items, setItems] = useState([]);
