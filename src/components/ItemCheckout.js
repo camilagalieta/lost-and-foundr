@@ -14,7 +14,7 @@ function ItemCheckout() {
     dataRegistro: selectedItem.registration_date
   });
 
-  const { idItem, itemPerdido, descricao, local, dataRegistro } = formulario;
+  const { idItem, itemPerdido, descricao, local, dataRegistro, recuperadoPor, dataEntrega } = formulario;
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -73,6 +73,14 @@ function ItemCheckout() {
             <div>
               <label htmlFor="dataRegistro">Data de Registro:</label>
               <input type="text" id="dataRegistro" name="dataRegistro" value={dataRegistro} onChange={handleChange} />
+            </div>
+            <div>
+              <label htmlFor="recuperadoPor">Recuperado por:</label>
+              <input type="text" id="recuperadoPor" name="recuperadoPor" value={recuperadoPor} onChange={handleChange} />
+            </div>
+            <div>
+              <label htmlFor="dataEntrega">Data de recuperação:</label>
+              <input type="text" id="dataEntrega" name="dataEntrega" value={dataEntrega} onChange={handleChange} />
             </div>
             <button className="submit-btn" type="submit">Salvar</button>
           </form>

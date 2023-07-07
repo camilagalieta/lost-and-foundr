@@ -7,6 +7,7 @@ import LostItems from './components/LostItems';
 import RecoveredItems from './components/RecoveredItems';
 import Menu from './components/Menu'
 import ItemCheckout from './components/ItemCheckout';
+import LocalReport from './components/LocalReport';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path = '/lost-items' element = {<LostItems />} />
         <Route path = '/recovered-items' element = {<RecoveredItems />} />
         <Route path = '/item-checkout' element = {<ItemCheckout />} />
+        <Route path = '/local-report' element = {<LocalReport />} />
 
       
       </Routes>
