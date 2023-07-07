@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './NewItem.css';
+import { useLocation } from 'react-router-dom';
 
-function NewItem() {
+function ItemCheckout() {
+  const location = useLocation();
+  const selectedItem = location.state?.item;
 
   const [formulario, setForumulario] = useState({
-    itemPerdido: '', 
-    descricao: '', 
-    local: '', 
-    dataRegistro: '', 
-    nomeDono: '',
-    dataEntrega: ''
+    idItem: selectedItem.item_id,
+    itemPerdido: selectedItem.item_name, 
+    descricao: selectedItem.item_description, 
+    local: selectedItem.location_found, 
+    dataRegistro: selectedItem.registration_date
   });
 
-  const { itemPerdido, descricao, local, dataRegistro, nomeDono, dataEntrega } = formulario;
+  const { idItem, itemPerdido, descricao, local, dataRegistro } = formulario;
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -26,16 +27,17 @@ function NewItem() {
   const handleSubmit = (e) => {
       e.preventDefault();
 
-    const newItem = {
+    const updatedItem = {
+      item_id: formulario.idItem,
       item_name: formulario.itemPerdido, 
       item_description: formulario.descricao, 
       location_found: formulario.local, 
       registration_date: formulario.dataRegistro,
-      recovered_by: formulario.nomeDono, 
-      recovered_date: formulario.dataEntrega
+      recovered_by: formulario.recuperadoPor,
+      recovery_date: formulario.dataEntrega
     };
 
-    axios.update('http://localhost:3001/items/update/:id', newItem)
+    axios.put('http://localhost:3001/items/update/'+formulario.idItem, updatedItem)
       .then(response => {
         if (response.status === 200) {
           console.log('Item salvo com sucesso!');
@@ -49,11 +51,11 @@ function NewItem() {
     };
 
    return (
-        <div className = "new-item">
-          <h2>Cadastro de Item Perdido</h2>
+        <div className = "item-checkout">
+          <h2>Finalizar Item Perdido</h2>
           <form onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="itemPerdido">Item Perdido:</label>
+              <label htmlFor="itemPerdido">Nome do Item:</label>
               <input type = "text" 
                 id = "itemPerdido" 
                 name = "itemPerdido" 
@@ -74,8 +76,8 @@ function NewItem() {
             </div>
             <button className="submit-btn" type="submit">Salvar</button>
           </form>
-        </div>
-      );
+        </div>   
+    );
 }
 
-export default NewItem;
+export default ItemCheckout;

@@ -1,9 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import {useNavigate } from 'react-router-dom';
 import './LostItems.css'
+
 
 function LostItems() {
     const [items, setItems] = useState([]);
+    const [selectedItem, getSelectedItem] = useState(null);
+    const navigate = useNavigate();
   
     useEffect(() => {
       fetchItems();
@@ -17,6 +21,16 @@ function LostItems() {
         console.error('Failed to fetch items!', error);
       }
     };
+
+    const handleItemSelect = (item) => {
+        // getSelectedItem(item);
+        navigate('/item-checkout', { state: { item } });
+    };
+
+    const handleItemCheckout = () => {
+        navigate('/item-checkout', { state: { selectedItem } });
+    }
+
     return (
         <div className='lost-items'>
             <h2>Itens Perdidos</h2>
@@ -31,7 +45,11 @@ function LostItems() {
                 </thead>
                 <tbody>
                     {items.map((item) => (
-                        <tr key={item.item_id}>
+                        <tr 
+                            key={item.item_id}
+                            onClick={() => handleItemSelect(item)}
+                            className={selectedItem === item ? 'selected':''}
+                        >
                             <td>{item.item_name}</td>
                             <td>{item.item_description}</td>
                             <td>{item.location_found}</td>
@@ -40,6 +58,7 @@ function LostItems() {
                     ))}
                 </tbody>
             </table>
+            <button className="submit-btn-atualizar" onClick={handleItemCheckout}>Atualizar</button>
         </div>
     );
 }
