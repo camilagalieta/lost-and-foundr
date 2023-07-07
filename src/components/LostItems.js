@@ -22,13 +22,22 @@ function LostItems() {
       }
     };
 
-    const handleItemSelect = (item) => {
-        // getSelectedItem(item);
+    const handleOnDelete = (item) => {
+        axios.delete('http://localhost:3001/items/delete/'+item.item_id)
+        .then(response => {
+          if (response.status === 200) {
+            window.location.reload(false);
+          } else {
+            console.log('falhooooooou')
+          }
+          console.log(response.data);
+        }).catch(error => {
+          console.error(error);
+        });
+    }
+    
+    const handleOnEdit = (item) => {
         navigate('/item-checkout', { state: { item } });
-    };
-
-    const handleItemCheckout = () => {
-        navigate('/item-checkout', { state: { selectedItem } });
     }
 
     return (
@@ -41,24 +50,23 @@ function LostItems() {
                         <th>Descrição</th>
                         <th>Local</th>
                         <th>Data de Resgistro</th>
+                        <th>Editar</th>
+                        <th>Remover</th>
                     </tr>
                 </thead>
                 <tbody>
                     {items.map((item) => (
-                        <tr 
-                            key={item.item_id}
-                            onClick={() => handleItemSelect(item)}
-                            className={selectedItem === item ? 'selected':''}
-                        >
+                        <tr key={item.item_id}>
                             <td>{item.item_name}</td>
                             <td>{item.item_description}</td>
                             <td>{item.location_found}</td>
                             <td>{item.registration_date}</td>
+                            <td><button onClick={() => handleOnEdit(item)}>Editar</button></td>
+                            <td><button onClick={() => handleOnDelete(item)}>Deletar</button></td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-            <button className="submit-btn-atualizar" onClick={handleItemCheckout}>Atualizar</button>
         </div>
     );
 }

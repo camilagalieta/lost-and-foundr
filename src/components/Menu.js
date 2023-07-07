@@ -12,7 +12,7 @@ function Menu() {
                     <li> <Link to='/new-item'>Novo Item</Link> </li>
                     <li> <Link to='/recovered-items'>Itens Recuperados</Link> </li>
                     <li> <Link to='/lost-items'>Itens Perdidos</Link> </li>
-                    <li> <Link to='/lost-items'>Itens Perdidos</Link> </li>
+                    <li> <Link to='/local-report'>Relatório local</Link> </li>
                 </ul>
             </nav>
         </header>
