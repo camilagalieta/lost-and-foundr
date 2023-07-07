@@ -1,8 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-
+import {useNavigate } from 'react-router-dom';
+import './RecoveredItems.css';
 
 function RecoveredItems() {
+    const [selectedItem, getSelectedItem] = useState(null);
+    const navigate = useNavigate();
     const [items, setItems] = useState([]);
   
     useEffect(() => {
@@ -17,6 +20,25 @@ function RecoveredItems() {
         console.error('Failed to fetch items!', error);
       }
     };
+
+    const handleOnDelete = (item) => {
+        axios.delete('http://localhost:3001/items/delete/'+item.item_id)
+        .then(response => {
+          if (response.status === 200) {
+            window.location.reload(false);
+          } else {
+            console.log('falhooooooou')
+          }
+          console.log(response.data);
+        }).catch(error => {
+          console.error(error);
+        });
+    }
+    
+    const handleOnEdit = (item) => {
+        navigate('/item-checkout', { state: { item } });
+    }
+
     return (
         <div className='recovered-items'>
             <h2>Itens Recuperados</h2>
@@ -29,6 +51,8 @@ function RecoveredItems() {
                         <th>Data de Resgistro</th>
                         <th>Nome do Dono</th>
                         <th>Data de Entrega</th>
+                        <th>Editar</th>
+                        <th>Remover</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,6 +64,8 @@ function RecoveredItems() {
                             <td>{item.registration_date}</td>
                             <td>{item.recovered_by}</td>
                             <td>{item.recovery_date }</td>
+                            <td><button onClick={() => handleOnEdit(item)}>Editar</button></td>
+                            <td><button onClick={() => handleOnDelete(item)}>Deletar</button></td>
                         </tr>
                     ))}
                 </tbody>

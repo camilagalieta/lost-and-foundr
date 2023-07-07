@@ -1,9 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import {useNavigate } from 'react-router-dom';
+import './LostItems.css'
 
 
 function LostItems() {
     const [items, setItems] = useState([]);
+    const [selectedItem, getSelectedItem] = useState(null);
+    const navigate = useNavigate();
   
     useEffect(() => {
       fetchItems();
@@ -17,6 +21,25 @@ function LostItems() {
         console.error('Failed to fetch items!', error);
       }
     };
+
+    const handleOnDelete = (item) => {
+        axios.delete('http://localhost:3001/items/delete/'+item.item_id)
+        .then(response => {
+          if (response.status === 200) {
+            window.location.reload(false);
+          } else {
+            console.log('falhooooooou')
+          }
+          console.log(response.data);
+        }).catch(error => {
+          console.error(error);
+        });
+    }
+    
+    const handleOnEdit = (item) => {
+        navigate('/item-checkout', { state: { item } });
+    }
+
     return (
         <div className='lost-items'>
             <h2>Itens Perdidos</h2>
@@ -27,6 +50,8 @@ function LostItems() {
                         <th>Descrição</th>
                         <th>Local</th>
                         <th>Data de Resgistro</th>
+                        <th>Editar</th>
+                        <th>Remover</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,6 +61,8 @@ function LostItems() {
                             <td>{item.item_description}</td>
                             <td>{item.location_found}</td>
                             <td>{item.registration_date}</td>
+                            <td><button onClick={() => handleOnEdit(item)}>Editar</button></td>
+                            <td><button onClick={() => handleOnDelete(item)}>Deletar</button></td>
                         </tr>
                     ))}
                 </tbody>

@@ -1,18 +1,20 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
-function NewItem() {
+function ItemCheckout() {
+  const location = useLocation();
+  const selectedItem = location.state?.item;
+
   const [formulario, setForumulario] = useState({
-    itemPerdido: "",
-    descricao: "",
-    local: "",
-    dataRegistro: "",
-    nomeDono: "",
-    dataEntrega: "",
+    idItem: selectedItem.item_id,
+    itemPerdido: selectedItem.item_name, 
+    descricao: selectedItem.item_description, 
+    local: selectedItem.location_found, 
+    dataRegistro: selectedItem.registration_date
   });
 
-  const { itemPerdido, descricao, local, dataRegistro, nomeDono, dataEntrega } =
-    formulario;
+  const { idItem, itemPerdido, descricao, local, dataRegistro, recuperadoPor, dataEntrega } = formulario;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,18 +27,18 @@ function NewItem() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newItem = {
-      item_name: formulario.itemPerdido,
-      item_description: formulario.descricao,
-      location_found: formulario.local,
+    const updatedItem = {
+      item_id: formulario.idItem,
+      item_name: formulario.itemPerdido, 
+      item_description: formulario.descricao, 
+      location_found: formulario.local, 
       registration_date: formulario.dataRegistro,
-      recovered_by: formulario.nomeDono,
-      recovered_date: formulario.dataEntrega,
+      recovered_by: formulario.recuperadoPor,
+      recovery_date: formulario.dataEntrega
     };
 
-    axios
-      .update("http://localhost:3001/items/update/:id", newItem)
-      .then((response) => {
+    axios.put('http://localhost:3001/items/update/'+formulario.idItem, updatedItem)
+      .then(response => {
         if (response.status === 200) {
           console.log("Item salvo com sucesso!");
         } else {
@@ -49,56 +51,42 @@ function NewItem() {
       });
   };
 
-  return (
-    <div className="new-item">
-      <h2>Cadastro de Item Perdido</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="itemPerdido">Item Perdido:</label>
-          <input
-            type="text"
-            id="itemPerdido"
-            name="itemPerdido"
-            value={itemPerdido}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="descricao">Descrição:</label>
-          <input
-            type="text"
-            id="descricao"
-            name="descricao"
-            value={descricao}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="local">Local:</label>
-          <input
-            type="text"
-            id="local"
-            name="local"
-            value={local}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="dataRegistro">Data de Registro:</label>
-          <input
-            type="text"
-            id="dataRegistro"
-            name="dataRegistro"
-            value={dataRegistro}
-            onChange={handleChange}
-          />
-        </div>
-        <button className="submit-btn" type="submit">
-          Salvar
-        </button>
-      </form>
-    </div>
-  );
+   return (
+        <div className = "item-checkout">
+          <h2>Finalizar Item Perdido</h2>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="itemPerdido">Nome do Item:</label>
+              <input type = "text" 
+                id = "itemPerdido" 
+                name = "itemPerdido" 
+                value = {itemPerdido} 
+                onChange={handleChange} />
+            </div>
+            <div>
+              <label htmlFor="descricao">Descrição:</label>
+              <input type="text" id="descricao" name="descricao" value={descricao} onChange={handleChange} />
+            </div>
+            <div>
+              <label htmlFor="local">Local:</label>
+              <input type="text" id="local" name="local" value={local} onChange={handleChange} />
+            </div>
+            <div>
+              <label htmlFor="dataRegistro">Data de Registro:</label>
+              <input type="text" id="dataRegistro" name="dataRegistro" value={dataRegistro} onChange={handleChange} />
+            </div>
+            <div>
+              <label htmlFor="recuperadoPor">Recuperado por:</label>
+              <input type="text" id="recuperadoPor" name="recuperadoPor" value={recuperadoPor} onChange={handleChange} />
+            </div>
+            <div>
+              <label htmlFor="dataEntrega">Data de recuperação:</label>
+              <input type="text" id="dataEntrega" name="dataEntrega" value={dataEntrega} onChange={handleChange} />
+            </div>
+            <button className="submit-btn" type="submit">Salvar</button>
+          </form>
+        </div>   
+    );
 }
 
-export default NewItem;
+export default ItemCheckout;

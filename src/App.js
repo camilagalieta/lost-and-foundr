@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NewItem from "./components/NewItem";
 import ItemCheckout from "./components/ItemCheckout";
-
+import LocalReport from "./components/LocalReport";
 import { RecoveredView } from "./views/recovered-view";
 import { LostView } from "./views/lost-view";
 import { RegisterItemView } from "./views/register-item";
@@ -22,6 +22,7 @@ export default function App() {
           <Route path="/register" element={<RegisterItemView />} />
           <Route path="/details/*" element={<ItemDetailsView />} />
 
+          <Route path="/local-report" element={<LocalReport />} />
           <Route path="/item-checkout" element={<ItemCheckout />} />
         </Routes>
       </Router>
