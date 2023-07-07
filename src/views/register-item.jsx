@@ -2,15 +2,16 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { NavbarWidget } from "../widgets/navbar";
 import { useState } from "react";
 
-export function RegisterItemView(props) {
+export function RegisterItemView() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [place, setPlace] = useState("");
   const [foundAt, setFoundAt] = useState("");
 
   return (
-    <Container>
-      <Form className="w-75 mx-auto">
+    <Container className="items-section">
+      <h2>Registrar item</h2>
+      <Form onSubmit={() => {}}>
         <Row>
           <Col>
             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -74,14 +75,24 @@ export function RegisterItemView(props) {
               className="w-100"
               variant="dark"
               type="button"
-              onClick={() => {}}
+              onClick={() => {
+                setName("");
+                setPlace("");
+                setFoundAt("");
+                setDescription("");
+              }}
             >
               Clear
             </Button>
           </Col>
 
           <Col>
-            <Button className="w-100" variant="success" type="submit">
+            <Button
+              className="w-100"
+              variant="success"
+              type="submit"
+              onClick={() => {}}
+            >
               Submit
             </Button>
           </Col>

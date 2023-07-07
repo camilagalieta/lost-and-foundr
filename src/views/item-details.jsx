@@ -1,10 +1,11 @@
 import { Container } from "react-bootstrap";
-import { NavbarWidget } from "../widgets/navbar";
 
-export function ItemDetailsView() {
+export function ItemDetailsView(props) {
   return (
-    <Container>
-        
+    <Container className="items-section">
+      <h2>Detalhes</h2>
+
+      
     </Container>
   );
 }

@@ -10,6 +10,12 @@
   --gray-dark: #707070;
   --shadow: rgba(0, 0, 0, 0.223);
 }
+
+.btn-success,
+.btn-success:hover {
+  background-color: var(--green-medium);
+}
+
 .custom-btn-primary {
   border-radius: 100px;
   padding: 10px 20px;
